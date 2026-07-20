@@ -8,13 +8,3 @@ async def get_db():
         yield session
 
 
-async def insert_fake_wallets(count: int = 20):
-    async with async_session_maker() as session:
-        wallets = []
-        for _ in range(count):
-            balance = round(random.uniform(0, 10000), 2)
-            wallet = Wallet(balance=balance)
-            wallets.append(wallet)
-
-        session.add_all(wallets)
-        await session.commit()
